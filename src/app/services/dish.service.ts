@@ -12,4 +12,14 @@ export class DishService {   //Making this class as injectalble.
   getDishes() : Dish[] {
     return DISHES;
   }
+
+  getDish(id: string) : Dish {
+    return  DISHES.filter( dish => { return dish.id === id})[0];
+}
+
+  getFeaturedDish(): Dish{
+    return DISHES.filter( dish => dish.featured )[0];
+  }
+
+  
 }

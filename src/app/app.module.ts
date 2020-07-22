@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list'
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule, Routes} from '@angular/router';
 import 'hammerjs';
 //end
 
@@ -25,6 +26,7 @@ import { ContactComponent } from './contact/contact.component';
 
 //my services
 import  { DishService } from './services/dish.service';
+import  { PromotionService } from './services/promotion.service';
 //end
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -49,9 +51,12 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule,
   ],
-  providers: [DishService],
+  providers: [
+    DishService,
+    PromotionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
