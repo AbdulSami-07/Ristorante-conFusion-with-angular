@@ -10,10 +10,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, Routes} from '@angular/router';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatSelectModule, MatSlideToggleModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import 'hammerjs';
 //end
@@ -66,7 +66,10 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MatFormFieldModule,
     MatCheckboxModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   entryComponents:[ //help us to overlay current component. 
     LoginComponent
