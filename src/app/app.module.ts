@@ -10,6 +10,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, Routes} from '@angular/router';
+import { MatDialogModule } from '@angular/material';
 import 'hammerjs';
 //end
 
@@ -22,6 +23,8 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';
+
 //end
 
 //my services
@@ -41,7 +44,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     FooterComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,10 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MatButtonModule,
     AppRoutingModule,
     RouterModule,
+    MatDialogModule
+  ],
+  entryComponents:[ //help us to overlay current component. 
+    LoginComponent
   ],
   providers: [
     DishService,
