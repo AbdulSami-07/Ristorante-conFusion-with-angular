@@ -11,6 +11,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, Routes} from '@angular/router';
 import { MatDialogModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 import 'hammerjs';
 //end
 
@@ -58,7 +62,11 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MatButtonModule,
     AppRoutingModule,
     RouterModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatInputModule,
+    FormsModule
   ],
   entryComponents:[ //help us to overlay current component. 
     LoginComponent

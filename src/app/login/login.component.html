@@ -3,3 +3,31 @@
   <span class="flex-spacer"></span>
   <button mat-button mat-dialog-close>&times;</button>
 </mat-toolbar>
+
+<p>{{user | json}}</p>
+
+<form novalidate (ngSubmit)="onSubmit()">  <!-- Angular will do validation not html. -->
+  <mat-dialog-content>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" type="text"
+          [(ngModel)]="user.username" name="username">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Username" type="text"
+          [(ngModel)]="user.password" name="password">
+      </mat-form-field>
+
+      <mat-checkbox [(ngModel)]="user.remember" name="remember"> Remember</mat-checkbox>
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" class="background-primary text-floral-white">Submit</button>
+  </mat-dialog-actions>
+
+</form>
