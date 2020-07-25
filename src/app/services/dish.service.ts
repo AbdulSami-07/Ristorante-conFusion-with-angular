@@ -9,16 +9,22 @@ export class DishService {   //Making this class as injectalble.
 
   constructor() { }
 
-  getDishes() : Dish[] {
-    return DISHES;
+  getDishes() : Promise <Dish[]> { // just to stimulate latency of server. 
+    return  new Promise( resolve => {
+      setTimeout( () => resolve(DISHES), 2000);
+    });
   }
 
-  getDish(id: string) : Dish {
-    return  DISHES.filter( dish => { return dish.id === id})[0];
+  getDish(id: string) : Promise <Dish> {
+    return  new Promise( resolve => {
+      setTimeout( () => resolve(DISHES.filter( dish => { return dish.id === id})[0]), 2000);
+    });
 }
 
-  getFeaturedDish(): Dish{
-    return DISHES.filter( dish => dish.featured )[0];
+  getFeaturedDish(): Promise <Dish> {
+    return  new Promise( resolve => {
+      setTimeout( () => resolve(DISHES.filter( dish => dish.featured )[0]), 2000);
+    });
   }
 
   
