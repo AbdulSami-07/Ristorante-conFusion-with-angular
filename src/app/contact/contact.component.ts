@@ -72,13 +72,14 @@ export class ContactComponent implements OnInit {
     this.feedbackForm.reset({
       firstname: "",
       lastname : "",
-      tetnum : 0,
+      tetnum : Number(),
       email : "",
       agree : false,
       contacttype : 'None',
       message : ""
     });
     this.feedbackFormDirective.resetForm();
+    this.createForm();
   }
 
   onValueChanged(data?: any) {

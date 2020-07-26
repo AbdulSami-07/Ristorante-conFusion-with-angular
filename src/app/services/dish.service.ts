@@ -3,6 +3,7 @@ import { Dish } from '../shared/dish';
 import { DISHES } from '../shared/dishes';
 import  { Observable, of } from 'rxjs';
 import  { delay } from  'rxjs/operators';
+import  { Comment } from '../shared/comment';
 
 
 @Injectable({
@@ -21,7 +22,7 @@ export class DishService {   //Making this class as injectalble.
   }
 
   getDish(id: string) : Observable <Dish> {
-    return  of(DISHES.filter( dish => dish.id === id)[0]).pipe(delay(2000));
+    return  of(DISHES.filter( dish => dish.id === id)[0]).pipe(delay(20));
 }
 
   getFeaturedDish(): Observable <Dish> {
@@ -30,6 +31,11 @@ export class DishService {   //Making this class as injectalble.
 
   getDishIds():  Observable <string[] | any> {
     return of(DISHES.map(dish => dish.id));
+  }
+
+  postDishComment(data : Comment, id : string) {
+  const index: number = DISHES.indexOf(DISHES.filter( dish => dish.id === id)[0]); 
+  DISHES[index].comments.push(data);
   }
 
   

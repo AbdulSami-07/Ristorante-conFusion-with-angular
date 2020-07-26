@@ -18,6 +18,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material';
 import {  MatSelectModule } from '@angular/material';
 import {  MatSlideToggleModule } from '@angular/material';
+import {  MatSliderModule } from '@angular/material';
+
 import 'hammerjs';
 //end
 
@@ -73,7 +75,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     ReactiveFormsModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule
   ],
   entryComponents:[ //help us to overlay current component. 
     LoginComponent
