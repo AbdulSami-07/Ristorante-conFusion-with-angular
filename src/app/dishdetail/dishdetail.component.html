@@ -3,10 +3,10 @@
     fxLayout.sm="column"
     fxLayout.xs="column"
     fxLayoutAlign.gt-md="space-around start"
-    fxLayoutGap="10px" 
+    fxLayoutGap="20px" 
     fxLayoutGap.xs="0">
 
-  <div fxFlex="40" *ngIf="dish">
+  <div fxFlex="45" *ngIf="dish">
     <mat-card>
       <mat-card-header>
         <mat-card-title>
@@ -17,15 +17,21 @@
       <mat-card-content>
         <p>{{dish.description}}</p>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions  fxLayout="row" fxLayoutAlign="space-evenly">
+        <button mat-button [routerLink]="['/dishdetail',prev]">
+          <span class="fa fa-chevron-left fa-lg"></span>
+        </button>
         <button mat-button  (click)="goBack()">BACK</button>
         <button mat-button>LIKE</button>
         <button mat-button>SHARE</button>
+        <button mat-button [routerLink]="['/dishdetail',next]">
+          <span class="fa fa-chevron-right fa-lg"></span>
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
 
-  <div fxFlex="40">
+  <div fxFlex="45" *ngIf="dish">
     <mat-list *ngIf="dish">
       <h3 style="padding-top:12px;">Comments</h3>
       <mat-list-item *ngFor="let prop of dish.comments">
