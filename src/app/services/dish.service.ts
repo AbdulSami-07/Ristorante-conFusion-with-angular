@@ -4,7 +4,7 @@ import { DISHES } from '../shared/dishes';
 import  { Observable, of } from 'rxjs';
 import  { delay } from  'rxjs/operators';
 import  { Comment } from '../shared/comment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import  { map, catchError } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from '../services/process-httpmsg.service';
@@ -26,11 +26,12 @@ export class DishService {   //Making this class as injectalble.
   }
 
   getDish(id: string) : Observable <Dish> {
-    return  this.http.get<Dish>(baseURL + 'dishes/' + id);
+    return  this.http.get<Dish>(baseURL + 'dishes/' + id)
+    .pipe(catchError(this.processHTTPMsgService.handleError));
 }
 
   getFeaturedDish(): Observable <Dish> {
-    return  this.http.get<Dish>(baseURL + 'dishees?featured=true').pipe(map(dishes => dishes[0]))
+    return  this.http.get<Dish>(baseURL + 'dishes?featured=true').pipe(map(dishes => dishes[0]))
     .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
@@ -39,10 +40,15 @@ export class DishService {   //Making this class as injectalble.
     .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
-  // postDishComment(data : Comment, id : string) {
-  // const index: number = DISHES.indexOf(DISHES.filter( dish => dish.id === id)[0]); 
-  // DISHES[index].comments.push(data);
-  // }
+  putDish(dish: Dish): Observable <Dish>{
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Content-Type' : 'application/json'
+      })
+    };
+    return this.http.put<Dish>(baseURL + 'dishes/' + dish.id, dish,httpOptions)
+    .pipe(catchError(this.processHTTPMsgService.handleError));
+  }
 
   
 }
