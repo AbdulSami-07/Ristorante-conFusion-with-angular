@@ -18,6 +18,7 @@ export class DishdetailComponent implements OnInit {
   dishIds : string[];
   prev : string;
   next : string;
+  errMess : string;
 
   commentForm : FormGroup;
   comment : Comment;
@@ -48,12 +49,14 @@ export class DishdetailComponent implements OnInit {
     // since we observable params so we don't need take snapshoot of params as we can
     //  get them as params in url changes. 
 
-    this.dishService.getDishIds().subscribe( (dishIds) => this.dishIds = dishIds);
+    this.dishService.getDishIds().subscribe( (dishIds) => this.dishIds = dishIds,
+    errmess => this.errMess = <any> errmess);
     this.route.params.pipe(switchMap( (params : Params) => this.dishService.getDish(params['id'])))   /* e.g of route /dishdetail/1 */
     .subscribe( dish => { 
       this.dish = dish;
       this.setPrevNext(dish.id);
-    });
+    },
+    errmess => this.errMess = <any> errmess);
 
   }
   
