@@ -19,6 +19,8 @@ import { MatProgressSpinnerModule } from '@angular/material';
 import {  MatSelectModule } from '@angular/material';
 import {  MatSlideToggleModule } from '@angular/material';
 import {  MatSliderModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 import 'hammerjs';
 //end
@@ -43,6 +45,7 @@ import { LeaderService } from './services/leader.service';
 //end
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { baseURL } from './shared/baseurl';
 
 @NgModule({
   declarations: [  //all the components that will comprise my website. 
@@ -76,7 +79,9 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MatSelectModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    HttpModule,
+    HttpClientModule
   ],
   entryComponents:[ //help us to overlay current component. 
     LoginComponent
@@ -84,7 +89,9 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
   providers: [
     DishService,
     PromotionService,
-    LeaderService],
+    LeaderService,
+    {provide: 'BaseURL' , useValue : baseURL}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
