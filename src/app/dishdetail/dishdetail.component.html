@@ -6,7 +6,7 @@
     fxLayoutGap="20px" 
     fxLayoutGap.xs="0">
 
-  <div fxFlex="45" *ngIf="dish">
+  <div fxFlex="45" *ngIf="dish" [@visibility]="visibility" [@expand]> <!-- [@trigger_name] = "state_variable" -->
     <mat-card>
       <mat-card-header>
         <mat-card-title>
@@ -31,7 +31,7 @@
     </mat-card>
   </div>
 
-  <div fxFlex="45" *ngIf="dish">
+  <div fxFlex="45" *ngIf="dish" [@visibility]="visibility" [@expand]> <!-- [@trigger_name] = "state_variable" -->
     <mat-list *ngIf="dish">
       <h3 style="padding-top:12px;">Comments</h3>
       <mat-list-item *ngFor="let prop of dish.comments">
