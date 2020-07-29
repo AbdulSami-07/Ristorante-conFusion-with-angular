@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
-import { flyInOut } from '../animations/app.animation';
-
+import { flyInOut, expand } from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
@@ -13,14 +13,19 @@ import { flyInOut } from '../animations/app.animation';
     'style': 'display: block'
   },
   animations : [
-    flyInOut()
+    flyInOut(),
+    expand()
   ]
 })
 export class ContactComponent implements OnInit {
 
   feedbackForm : FormGroup;
   feedback : Feedback;
+  feedbackReturn : Feedback;
   contactType = ContactType;
+  sentForSub : boolean = false;
+  errMess : string;
+  waitFor5Sec : boolean = false;
   @ViewChild('fform') feedbackFormDirective; // this enable us to get access to template form and then completely reset it. 
 
   formErrors = {
@@ -37,7 +42,7 @@ export class ContactComponent implements OnInit {
       'maxlength' : 'Max. 25 characters.'
     },
     'lastname' : {
-      'required' : 'First name is required.', 
+      'required' : 'Last name is required.', 
       'minlength' : 'Atleast 2 characters.',
       'maxlength' : 'Max. 25 characters.'
     },
@@ -51,11 +56,12 @@ export class ContactComponent implements OnInit {
     }
   };
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private feedbackService : FeedbackService ) { 
     this.createForm();
   }
 
   ngOnInit() {
+
   }
 
   createForm(){
@@ -77,18 +83,50 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.feedback = this.feedbackForm.value; //since feedback model is same as the form model. 
-    console.log(this.feedback);
-    this.feedbackForm.reset({
-      firstname: "",
-      lastname : "",
-      tetnum : Number(),
-      email : "",
-      agree : false,
-      contacttype : 'None',
-      message : ""
+    this.waitFor5Sec = true;
+    this.feedbackService.submitFeedback(this.feedback).subscribe( feedback => {
+    this.feedbackReturn = feedback;
+    this.sentForSub = true;
+    this.waitFor5Sec = false;
+    setTimeout(()=>{
+        this.sentForSub = false;
+        this.feedback = null;
+        this.feedbackReturn = null;
+        this.feedbackForm.reset({
+          firstname: "",
+          lastname : "",
+          tetnum : 0,
+          email : "",
+          agree : false,
+          contacttype : 'None',
+          message : ""
+        });
+        this.feedbackFormDirective.resetForm();
+      }, 5000);
+      
+    },
+    errmess =>{
+      this.errMess = errmess,
+      this.waitFor5Sec = false;
+      this.sentForSub = true;
+      setTimeout(()=>{
+      this.sentForSub = false;
+      this.feedback = null;
+      this.feedbackReturn = null;
+      this.feedbackForm.reset({
+        firstname: "",
+        lastname : "",
+        tetnum : 0,
+        email : "",
+        agree : false,
+        contacttype : 'None',
+        message : ""
+      });
+      this.errMess = "";
+      this.feedbackFormDirective.resetForm();
+      }, 5000);
+      
     });
-    this.feedbackFormDirective.resetForm();
-    this.createForm();
   }
 
   onValueChanged(data?: any) {

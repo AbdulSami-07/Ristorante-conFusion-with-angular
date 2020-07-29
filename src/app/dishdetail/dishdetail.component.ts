@@ -63,6 +63,7 @@ export class DishdetailComponent implements OnInit {
 
     this.dishService.getDishIds().subscribe( (dishIds) => this.dishIds = dishIds,
     errmess => this.errMess = <any> errmess);
+    
     this.route.params.pipe(switchMap( (params : Params) => {
         this.visibility= 'hidden';
         return this.dishService.getDish(params['id']) }))   /* e.g of route /dishdetail/1 */

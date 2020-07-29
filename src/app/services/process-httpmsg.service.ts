@@ -15,7 +15,7 @@ export class ProcessHTTPMsgService {
       errMsg = error.error.message;
     }
     else{
-      errMsg = `${error.status} - ${error.statusText || ''} ${error.error}`; 
+      errMsg = `${error.status} - ${error.statusText || ''} ${error.error.message}`; 
     }
     return throwError(errMsg);
   }

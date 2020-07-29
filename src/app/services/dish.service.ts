@@ -19,8 +19,7 @@ export class DishService {   //Making this class as injectalble.
   // Obervable can what Promise can do.
   // then of Promise is equiv. to subscribe of Observable. 
 
-  getDishes() : Observable <Dish[]> { // just to stimulate latency of server. 
-    // of helps to sent to pick only one value. 
+  getDishes() : Observable <Dish[]> { 
     return  this.http.get<Dish[]>(baseURL + 'dishes')
       .pipe(catchError(this.processHTTPMsgService.handleError)); 
   }
